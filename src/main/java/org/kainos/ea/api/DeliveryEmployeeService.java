@@ -31,12 +31,8 @@ public class DeliveryEmployeeService {
 
             if (validation != null) {
                 throw new InvalidDeliveryEmployeeException(validation);
-
             }
             int id = deliveryEmployeeDao.createDeliveryEmployee(deliveryEmployee);
-
-            if (id == -1) {
-            }
 
             return id;
         } catch (SQLException e) {
