@@ -56,4 +56,23 @@ public class SalesEmployeeDao {
         }
         return list;
     }
+
+    public SalesEmployee getSalesEmployeeByID(int id) throws SQLException {
+        Connection c = databaseConnector.getConnection();
+        Statement st = c.createStatement();
+
+        ResultSet rs = st.executeQuery("SELECT SalesEmployeeID, Name, Salary, BankAccNumber, NINumber, CommissionRate FROM SalesEmployee WHERE ProductID = " + id + ";");
+
+        while (rs.next()) {
+            return new SalesEmployee(
+                    rs.getInt("SalesEmployeeID"),
+                    rs.getString("Name"),
+                    rs.getDouble("Salary"),
+                    rs.getString("BankAccNumber"),
+                    rs.getString("NINumber"),
+                    rs.getDouble("CommissionRate")
+            );
+        }
+        return null;
+    }
 }
