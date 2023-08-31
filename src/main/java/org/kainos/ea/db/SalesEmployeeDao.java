@@ -75,4 +75,19 @@ public class SalesEmployeeDao {
         }
         return null;
     }
+
+    public void updateSalesEmployee(int id, SalesEmployeeRequest salesEmployee) throws SQLException {
+        Connection c = databaseConnector.getConnection();
+        String updateStatement = "UPDATE salesEmployee SET Name = ?, Salary = ?, BankAccNumber = ?, NINumber = ?, CommissionRate = ? WHERE OrderID = ?";
+        PreparedStatement st = c.prepareStatement(updateStatement);
+
+        st.setString(1, salesEmployee.getName());
+        st.setDouble(2, salesEmployee.getSalary());
+        st.setString(3, salesEmployee.getBankAccNumber());
+        st.setString(4, salesEmployee.getNiNumber());
+        st.setDouble(5, salesEmployee.getCommRate());
+        st.setInt(6, id);
+
+        st.executeUpdate();
+    }
 }
