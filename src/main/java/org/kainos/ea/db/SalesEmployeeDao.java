@@ -61,7 +61,7 @@ public class SalesEmployeeDao {
         Connection c = databaseConnector.getConnection();
         Statement st = c.createStatement();
 
-        ResultSet rs = st.executeQuery("SELECT SalesEmployeeID, Name, Salary, BankAccNumber, NINumber, CommissionRate FROM SalesEmployee WHERE ProductID = " + id + ";");
+        ResultSet rs = st.executeQuery("SELECT SalesEmployeeID, Name, Salary, BankAccNumber, NINumber, CommissionRate FROM SalesEmployee WHERE SalesEmployeeID = " + id + ";");
 
         while (rs.next()) {
             return new SalesEmployee(
