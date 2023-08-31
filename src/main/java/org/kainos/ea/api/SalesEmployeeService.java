@@ -4,6 +4,7 @@ import org.kainos.ea.cli.SalesEmployee;
 import org.kainos.ea.cli.SalesEmployeeRequest;
 import org.kainos.ea.client.FailedToCreateSalesEmployeeException;
 import org.kainos.ea.client.FailedToGetSalesEmployeeException;
+import org.kainos.ea.client.FailedToUpdateSalesEmployeeException;
 import org.kainos.ea.client.InvalidSalesEmployeeException;
 import org.kainos.ea.client.SalesEmployeeDoesNotExistException;
 import org.kainos.ea.core.SalesEmployeeValidator;
@@ -55,6 +56,27 @@ public class SalesEmployeeService {
         } catch (SQLException e){
             System.err.println(e.getMessage());
             throw new FailedToGetSalesEmployeeException();
+        }
+    }
+
+    public int updateSalesEmployee(int id, SalesEmployeeRequest salesEmployee) throws InvalidSalesEmployeeException, SalesEmployeeDoesNotExistException, FailedToUpdateSalesEmployeeException {
+        try {
+            String validation = SalesEmployeeValidator.isValidSalesEmployee(salesEmployee);
+
+            if(validation != null){
+                throw new InvalidSalesEmployeeException(validation);
+            }
+
+            SalesEmployee salesEmployeeToUpdate = dao.getSalesEmployeeByID(id);
+            if(salesEmployeeToUpdate == null){
+                throw new SalesEmployeeDoesNotExistException();
+            }
+
+            dao.updateSalesEmployee(id, salesEmployee);
+            return id;
+        } catch (SQLException e){
+            System.err.println(e.getMessage());
+            throw new FailedToUpdateSalesEmployeeException();
         }
     }
 }

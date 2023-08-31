@@ -6,6 +6,7 @@ import org.kainos.ea.cli.SalesEmployee;
 import org.kainos.ea.cli.SalesEmployeeRequest;
 import org.kainos.ea.client.FailedToCreateSalesEmployeeException;
 import org.kainos.ea.client.FailedToGetSalesEmployeeException;
+import org.kainos.ea.client.FailedToUpdateSalesEmployeeException;
 import org.kainos.ea.client.InvalidSalesEmployeeException;
 import org.kainos.ea.client.SalesEmployeeDoesNotExistException;
 
@@ -62,6 +63,21 @@ public class SalesEmployeeController {
         } catch (InvalidSalesEmployeeException e) {
             System.err.println(e.getMessage());
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+        }
+    }
+
+    @PUT
+    @Path("/salesEmployees/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response updateSalesEmployee(@PathParam("id") int id, SalesEmployeeRequest salesEmployee){
+        try {
+            return Response.ok(service.updateSalesEmployee(id, salesEmployee)).build();
+        } catch (InvalidSalesEmployeeException | SalesEmployeeDoesNotExistException e) {
+            System.err.println(e.getMessage());
+            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+        } catch (FailedToUpdateSalesEmployeeException e) {
+            System.err.println(e.getMessage());
+            return Response.serverError().build();
         }
     }
 }
