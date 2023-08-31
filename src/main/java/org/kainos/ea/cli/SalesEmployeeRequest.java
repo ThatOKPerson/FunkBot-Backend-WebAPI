@@ -3,29 +3,24 @@ package org.kainos.ea.cli;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class SalesEmployee {
-    private int salesEmployeeId;
+public class SalesEmployeeRequest {
     private String name;
     private Double salary;
     private String bankAccNumber;
     private String niNumber;
     private Double commRate;
-
-    public SalesEmployee(int salesEmployeeId, String name, Double salary, String bankAccNumber, String niNumber, Double commRate) {
-        this.salesEmployeeId = salesEmployeeId;
+    @JsonCreator
+    public SalesEmployeeRequest(
+            @JsonProperty("name") String name,
+            @JsonProperty("salary") Double salary,
+            @JsonProperty("bankAccNumber") String bankAccNumber,
+            @JsonProperty("niNumber") String niNumber,
+            @JsonProperty("commRate") Double commRate) {
         this.name = name;
         this.salary = salary;
         this.bankAccNumber = bankAccNumber;
         this.niNumber = niNumber;
         this.commRate = commRate;
-    }
-
-    public int getSalesEmployeeId() {
-        return salesEmployeeId;
-    }
-
-    public void setSalesEmployeeId(int salesEmployeeId) {
-        this.salesEmployeeId = salesEmployeeId;
     }
 
     public Double getCommRate() {

@@ -1,16 +1,19 @@
 package org.kainos.ea.api;
 
 import org.kainos.ea.cli.SalesEmployee;
+import org.kainos.ea.cli.SalesEmployeeRequest;
 import org.kainos.ea.client.FailedToCreateSalesEmployeeException;
+import org.kainos.ea.client.FailedToGetSalesEmployeeException;
 import org.kainos.ea.client.InvalidSalesEmployeeException;
 import org.kainos.ea.core.SalesEmployeeValidator;
 import org.kainos.ea.db.SalesEmployeeDao;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class SalesEmployeeService {
     private SalesEmployeeDao dao = new SalesEmployeeDao();
-    public int createSalesEmployee(SalesEmployee salesEmployee) throws FailedToCreateSalesEmployeeException, InvalidSalesEmployeeException {
+    public int createSalesEmployee(SalesEmployeeRequest salesEmployee) throws FailedToCreateSalesEmployeeException, InvalidSalesEmployeeException {
         try {
             String validation = SalesEmployeeValidator.isValidSalesEmployee(salesEmployee);
 
@@ -28,5 +31,16 @@ public class SalesEmployeeService {
             System.err.println(e.getMessage());
             throw new FailedToCreateSalesEmployeeException();
         }
+    }
+    public List<SalesEmployee> getAllSalesEmployees() throws FailedToGetSalesEmployeeException {
+
+        List<SalesEmployee> salesEmployeeList = null;
+        try {
+            salesEmployeeList = dao.getAllSalesEmployees();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            throw new FailedToGetSalesEmployeeException();
+        }
+        return salesEmployeeList;
     }
 }

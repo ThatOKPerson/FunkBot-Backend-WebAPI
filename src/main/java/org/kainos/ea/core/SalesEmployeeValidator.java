@@ -1,11 +1,8 @@
 package org.kainos.ea.core;
-
-import org.kainos.ea.cli.SalesEmployee;
-
-import java.sql.SQLException;
+import org.kainos.ea.cli.SalesEmployeeRequest;
 
 public class SalesEmployeeValidator {
-    public static String isValidSalesEmployee(SalesEmployee salesEmployee) {
+    public static String isValidSalesEmployee(SalesEmployeeRequest salesEmployee) {
         if (salesEmployee.getName().length() > 60){
             return "name greater than 60 characters";
         }
