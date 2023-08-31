@@ -25,6 +25,22 @@ public class DeliveryEmployeeService {
         }
     }
 
+    public DeliveryEmployee getDeliveryEmployeesByID(int id) throws FailedToGetDeliveryEmployeeException, DeliveryEmployeeDoesNotExistException {
+        try {
+            DeliveryEmployee deliveryEmployee = deliveryEmployeeDao.getDeliveryEmployeeByID(id);
+
+            if (deliveryEmployee == null) {
+                throw new DeliveryEmployeeDoesNotExistException();
+            }
+
+            return deliveryEmployee;
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+
+            throw new FailedToGetDeliveryEmployeeException();
+        }
+    }
+
     public int createDeliveryEmployee(DeliveryEmployeeRequest deliveryEmployee) throws FailedToCreateDeliveryEmployeeException, InvalidDeliveryEmployeeException {
         try {
             String validation = deliveryEmployeeValidator.isValidDeliveryEmployee(deliveryEmployee);

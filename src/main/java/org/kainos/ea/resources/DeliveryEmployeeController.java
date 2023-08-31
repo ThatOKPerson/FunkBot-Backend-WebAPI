@@ -27,6 +27,23 @@ public class DeliveryEmployeeController {
         }
     }
 
+    @GET
+    @Path("/deliveryEmployees/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getDeliveryEmployeesByID(@PathParam("id") int id) {
+        try {
+            return Response.ok(deliveryEmployeeService.getDeliveryEmployeesByID(id)).build();
+        } catch (FailedToGetDeliveryEmployeeException e) {
+            System.err.println(e.getMessage());
+
+            return Response.serverError().build();
+        } catch (DeliveryEmployeeDoesNotExistException e) {
+            System.err.println(e.getMessage());
+
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        }
+    }
+
     @POST
     @Path("/deliveryEmployees")
     @Produces(MediaType.APPLICATION_JSON)
