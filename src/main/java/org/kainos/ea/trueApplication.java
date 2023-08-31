@@ -5,6 +5,7 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.federecio.dropwizard.swagger.SwaggerBundle;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
+import org.kainos.ea.resources.DeliveryEmployeeController;
 
 public class trueApplication extends Application<trueConfiguration> {
 
@@ -30,7 +31,6 @@ public class trueApplication extends Application<trueConfiguration> {
     @Override
     public void run(final trueConfiguration configuration,
                     final Environment environment) {
-        // TODO: implement application
+        environment.jersey().register(new DeliveryEmployeeController());
     }
-
 }
