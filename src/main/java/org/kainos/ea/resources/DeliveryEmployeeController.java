@@ -45,9 +45,9 @@ public class DeliveryEmployeeController {
     }
 
     @PUT
-    @Path("/products/{id}")
+    @Path("/deliveryEmployees/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createDeliveryEmployee(@PathParam("id") int id, DeliveryEmployeeRequest deliveryEmployee) {
+    public Response updateDeliveryEmployees(@PathParam("id") int id, DeliveryEmployeeRequest deliveryEmployee) {
         try {
             deliveryEmployeeService.updateDeliveryEmployee(id, deliveryEmployee);
 

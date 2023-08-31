@@ -11,7 +11,7 @@ import java.util.List;
 
 public class DeliveryEmployeeService {
     private DeliveryEmployeeDao deliveryEmployeeDao = new DeliveryEmployeeDao();
-    //private ProductValidator productValidator = new ProductValidator();
+    private DeliveryEmployeeValidator deliveryEmployeeValidator = new DeliveryEmployeeValidator();
 
     public List<DeliveryEmployee> getAllDeliveryEmployees() throws FailedToGetDeliveryEmployeeException {
         try {
@@ -27,7 +27,7 @@ public class DeliveryEmployeeService {
 
     public int createDeliveryEmployee(DeliveryEmployeeRequest deliveryEmployee) throws FailedToCreateDeliveryEmployeeException, InvalidDeliveryEmployeeException {
         try {
-            String validation = DeliveryEmployeeValidator.isValidDeliveryEmployee(deliveryEmployee);
+            String validation = deliveryEmployeeValidator.isValidDeliveryEmployee(deliveryEmployee);
 
             if (validation != null) {
                 throw new InvalidDeliveryEmployeeException(validation);
@@ -48,7 +48,7 @@ public class DeliveryEmployeeService {
 
     public void updateDeliveryEmployee (int id, DeliveryEmployeeRequest deliveryEmployee) throws InvalidDeliveryEmployeeException, DeliveryEmployeeDoesNotExistException, FailedToUpdateDeliveryEmployeeException {
         try {
-            String validation = DeliveryEmployeeValidator.isValidDeliveryEmployee(deliveryEmployee);
+            String validation = deliveryEmployeeValidator.isValidDeliveryEmployee(deliveryEmployee);
 
             if (validation != null) {
                 throw new InvalidDeliveryEmployeeException(validation);

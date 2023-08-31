@@ -3,7 +3,7 @@ package org.kainos.ea.core;
 import org.kainos.ea.cli.DeliveryEmployeeRequest;
 
 public class DeliveryEmployeeValidator {
-        public static String isValidDeliveryEmployee (DeliveryEmployeeRequest deliveryEmployee) {
+        public String isValidDeliveryEmployee (DeliveryEmployeeRequest deliveryEmployee) {
             if (deliveryEmployee.getName().length() > 60) {
                 return "Name greater than 60 characters";
             }
