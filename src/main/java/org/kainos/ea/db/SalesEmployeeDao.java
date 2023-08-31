@@ -78,7 +78,7 @@ public class SalesEmployeeDao {
 
     public void updateSalesEmployee(int id, SalesEmployeeRequest salesEmployee) throws SQLException {
         Connection c = databaseConnector.getConnection();
-        String updateStatement = "UPDATE salesEmployee SET Name = ?, Salary = ?, BankAccNumber = ?, NINumber = ?, CommissionRate = ? WHERE OrderID = ?";
+        String updateStatement = "UPDATE salesEmployee SET Name = ?, Salary = ?, BankAccNumber = ?, NINumber = ?, CommissionRate = ? WHERE SalesEmployeeID = ?";
         PreparedStatement st = c.prepareStatement(updateStatement);
 
         st.setString(1, salesEmployee.getName());
