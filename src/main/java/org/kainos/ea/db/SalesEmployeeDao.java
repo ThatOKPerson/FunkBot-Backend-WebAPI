@@ -35,24 +35,25 @@ public class SalesEmployeeDao {
         return -1;
     }
 
-    public List<SalesEmployeeRequest> getAllSalesEmployees() throws SQLException {
+    public List<SalesEmployee> getAllSalesEmployees() throws SQLException {
         Connection c = databaseConnector.getConnection();
         Statement st = c.createStatement();
 
-        ResultSet rs = st.executeQuery("SELECT Name, Salary, BankAccNumber, NINumber, CommissionRate FROM SalesEmployee;");
+        ResultSet rs = st.executeQuery("SELECT SalesEmployeeID, Name, Salary, BankAccNumber, NINumber, CommissionRate FROM SalesEmployee;");
 
-        List<SalesEmployeeRequest> orderList = new ArrayList<>();
+        List<SalesEmployee> list = new ArrayList<>();
 
         while (rs.next()) {
-            SalesEmployeeRequest salesEmployee = new SalesEmployeeRequest(
+            SalesEmployee salesEmployee = new SalesEmployee(
+                    rs.getInt("SalesEmployeeID"),
                     rs.getString("Name"),
                     rs.getDouble("Salary"),
                     rs.getString("BankAccNumber"),
                     rs.getString("NINumber"),
                     rs.getDouble("CommissionRate")
             );
-            orderList.add(salesEmployee);
+            list.add(salesEmployee);
         }
-        return orderList;
+        return list;
     }
 }

@@ -32,9 +32,9 @@ public class SalesEmployeeService {
             throw new FailedToCreateSalesEmployeeException();
         }
     }
-    public List<SalesEmployeeRequest> getAllSalesEmployees() throws FailedToGetSalesEmployeeException {
+    public List<SalesEmployee> getAllSalesEmployees() throws FailedToGetSalesEmployeeException {
 
-        List<SalesEmployeeRequest> salesEmployeeList = null;
+        List<SalesEmployee> salesEmployeeList = null;
         try {
             salesEmployeeList = dao.getAllSalesEmployees();
         } catch (SQLException e) {
