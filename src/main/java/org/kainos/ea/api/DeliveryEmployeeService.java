@@ -65,4 +65,21 @@ public class DeliveryEmployeeService {
             throw new FailedToUpdateDeliveryEmployeeException();
         }
     }
+
+    public void deleteDeliveryEmployee (int id) throws DeliveryEmployeeDoesNotExistException, FailedToDeleteDeliveryEmployeeException {
+        try {
+            DeliveryEmployee deliveryEmployeeToDelete = deliveryEmployeeDao.getDeliveryEmployeeByID(id);
+
+            if (deliveryEmployeeToDelete == null) {
+                throw new DeliveryEmployeeDoesNotExistException();
+            }
+
+            deliveryEmployeeDao.deleteDeliveryEmployee(id);
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+
+            throw new FailedToDeleteDeliveryEmployeeException();
+        }
+    }
+
 }

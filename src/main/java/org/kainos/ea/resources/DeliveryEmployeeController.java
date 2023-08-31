@@ -62,4 +62,23 @@ public class DeliveryEmployeeController {
             return Response.serverError().build();
         }
     }
+
+    @DELETE
+    @Path("/deliveryEmployees/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteDeliveryEmployees(@PathParam("id") int id) {
+        try {
+            deliveryEmployeeService.deleteDeliveryEmployee(id);
+
+            return Response.ok().build();
+        } catch (DeliveryEmployeeDoesNotExistException e) {
+            System.err.println(e.getMessage());
+
+            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+        } catch (FailedToDeleteDeliveryEmployeeException e) {
+            System.err.println(e.getMessage());
+
+            return Response.serverError().build();
+        }
+    }
 }
